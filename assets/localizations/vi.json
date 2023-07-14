@@ -1,0 +1,17 @@
+{
+    "login":{
+        "title":"Login",
+        "title_login":"Đăng nhập để học ngay nhé",
+        "title_google":"Tiếp tục với Google",
+        "title_apple":"Tiếp tục với Apple",
+        "space":"Hoặc",
+        "hintex_email":"Vui lòng nhập Email",
+        "hintex_password":"Nhập mật khẩu tài khoản học",
+        "button_login":"Đăng nhập",
+        "forgot_password":"Quên mật khẩu",
+        "no_password":"Chưa có tài khoản?",
+        "create_password":"Tạo tài khoản học mới",
+        "error_email":"*Email không đúng,bạn kiểm tra lại",
+        "error_password":"*Mật khẩu không hợp lệ"
+    }
+}
