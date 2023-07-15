@@ -1,26 +1,41 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class TextFormFeldLogin extends StatefulWidget {
-  const TextFormFeldLogin({super.key});
+import '../helpers/string_helper.dart';
 
+class TextFormFeldLogin extends StatefulWidget {
+  const TextFormFeldLogin({super.key, this.hintext, this.onChange});
+  final String? hintext;
+  final Function(String?)? onChange;
   @override
   State<TextFormFeldLogin> createState() => _TextFormFeldLoginState();
 }
 
 class _TextFormFeldLoginState extends State<TextFormFeldLogin> {
+  GlobalKey<FormFieldState> pwStateKey = GlobalKey<FormFieldState>();
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      decoration: InputDecoration(
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
-      validator: (text) {
-        if (text == null) return '';
-        if (text.length < 6) {
-          return 'Mật khẩu quá ngắn';
-        }
-        return null;
-      },
+    return Form(
+      key: pwStateKey,
+      child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        onChanged: widget.onChange,
+        decoration: InputDecoration(
+            hintText: widget.hintext,
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
+        validator: (value) {
+          if (widget.hintext == tr('login.hintex_email') &&
+              !StringHelper.isEmail(value!)) {
+            return 'Invalid email format';
+          }
+          if (widget.hintext == tr('login.hintex_password') &&
+              !StringHelper.isPassword(value!)) {
+            return 'Invalid password format';
+          }
+          return null;
+        },
+      ),
     );
   }
 }
