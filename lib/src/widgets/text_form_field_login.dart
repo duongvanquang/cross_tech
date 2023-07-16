@@ -27,11 +27,11 @@ class _TextFormFeldLoginState extends State<TextFormFeldLogin> {
         validator: (value) {
           if (widget.hintext == tr('login.hintex_email') &&
               !StringHelper.isEmail(value!)) {
-            return 'Invalid email format';
+            return tr('login.error_email');
           }
           if (widget.hintext == tr('login.hintex_password') &&
               !StringHelper.isPassword(value!)) {
-            return 'Invalid password format';
+            return tr('login.error_password');
           }
           return null;
         },
