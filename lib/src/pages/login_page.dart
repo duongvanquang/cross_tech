@@ -79,19 +79,15 @@ class _LoginPageState extends State<LoginPage> {
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
-                              Center(
-                                child: Transform.translate(
-                                  offset: const Offset(0, -10),
-                                  child: Text(
-                                    tr('login.title_login'),
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w700,
-                                      height: 3,
-                                    ),
-                                  ),
-                                ),
+                              Text(
+                                tr('login.title_login'),
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                    height: 3,
+                                    leadingDistribution:
+                                        TextLeadingDistribution.even),
                               ),
                               const SizedBox(
                                 height: 25,

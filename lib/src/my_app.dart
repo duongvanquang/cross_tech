@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
+import 'pages/home_page.dart';
 import 'pages/login_page.dart';
 
 class MyApp extends StatelessWidget {
