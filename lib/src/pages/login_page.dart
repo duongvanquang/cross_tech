@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../constances/assets_path.dart';
 import '../helpers/string_helper.dart'; // Import the StringHelper class
@@ -18,6 +19,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   StreamController<bool> broadcastStreamController =
       StreamController<bool>.broadcast();
+  GoogleSignInAccount? _currentUser;
+  bool _isAuthorized = false; // has granted permissions?
+  String _contactText = '';
   @override
   void dispose() {
     broadcastStreamController.close();
