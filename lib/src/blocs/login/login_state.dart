@@ -1,8 +1,10 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+part 'login_state.freezed.dart'; // Import the generated file
 
-class LoginState extends Equatable {
-  const LoginState();
-
-  @override
-  List<Object?> get props => throw UnimplementedError();
+@freezed
+class LoginState with _$LoginState {
+  const factory LoginState.initial() = LoginStateInitial;
+  const factory LoginState.loading() = LoginStateLoading;
+  const factory LoginState.success() = LoginStateSuccess;
+  const factory LoginState.error() = LoginStateError;
 }
