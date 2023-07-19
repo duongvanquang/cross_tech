@@ -1,9 +1,8 @@
 import 'dart:async';
 
+import 'package:cross_tech/src/pages/signup_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-
 import '../constances/assets_path.dart';
 import '../helpers/string_helper.dart'; // Import the StringHelper class
 import '../widgets/chose_login.dart';
@@ -19,9 +18,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   StreamController<bool> broadcastStreamController =
       StreamController<bool>.broadcast();
-  GoogleSignInAccount? _currentUser;
-  bool _isAuthorized = false; // has granted permissions?
-  String _contactText = '';
   @override
   void dispose() {
     broadcastStreamController.close();
@@ -97,6 +93,14 @@ class _LoginPageState extends State<LoginPage> {
                                 height: 25,
                               ),
                               ChoseLogin(
+                                ontap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SignUpPage()),
+                                  );
+                                },
                                 color: Colors.red,
                                 width: MediaQuery.of(context).size.width / 1.4,
                                 textButtonLogin: tr('login.title_google'),
@@ -121,6 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               const SizedBox(height: 20),
                               TextFormFeldLogin(
+                                isObscure: false,
                                 onChange: (value) {
                                   setState(() {
                                     isEmailValid = StringHelper.isEmail(value!);
@@ -130,6 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               const SizedBox(height: 17),
                               TextFormFeldLogin(
+                                isObscure: true,
                                 onChange: (value) {
                                   setState(() {
                                     isPasswordValid =

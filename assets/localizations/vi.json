@@ -12,6 +12,7 @@
         "no_password":"Chưa có tài khoản?",
         "create_password":"Tạo tài khoản học mới",
         "error_email":"*Email không đúng,bạn kiểm tra lại",
-        "error_password":"*Mật khẩu không hợp lệ"
+        "error_password":"*Mật khẩu không hợp lệ",
+        "button_signup":"Đăng ký"
     }
 }
