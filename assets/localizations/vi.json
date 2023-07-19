@@ -13,6 +13,7 @@
         "create_password":"Tạo tài khoản học mới",
         "error_email":"*Email không đúng,bạn kiểm tra lại",
         "error_password":"*Mật khẩu không hợp lệ",
-        "button_signup":"Đăng ký"
+        "button_signup":"Đăng ký",
+        "title_snapbar_login":"Tài Khoản hoặc mật khẩu không đúng"
     }
 }

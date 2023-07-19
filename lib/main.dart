@@ -13,7 +13,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  _initApp;
+  await _initApp();
   runApp(EasyLocalization(
       supportedLocales: const [Locale('vi')],
       startLocale: const Locale('vi'),

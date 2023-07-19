@@ -4,6 +4,6 @@ import 'login/login_cubit.dart';
 
 class BlocDependencies {
   static void init(GetIt injector) {
-    injector.registerLazySingleton<LoginCubit>(() => LoginCubit(injector()));
+    injector.registerFactory<LoginCubit>(() => LoginCubit());
   }
 }

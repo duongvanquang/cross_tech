@@ -6,5 +6,5 @@ class LoginState with _$LoginState {
   const factory LoginState.initial() = LoginStateInitial;
   const factory LoginState.loading() = LoginStateLoading;
   const factory LoginState.success() = LoginStateSuccess;
-  const factory LoginState.error() = LoginStateError;
+  const factory LoginState.error({required String massege}) = LoginStateError;
 }

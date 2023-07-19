@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../commonts/base_cubit.dart';
@@ -5,21 +6,24 @@ import '../../helpers/string_helper.dart';
 import 'login_state.dart';
 
 class LoginCubit extends BaseCubit<LoginState> {
-  LoginCubit(this.auth) : super(const LoginState.initial());
+  LoginCubit() : super(const LoginState.initial());
   FirebaseAuth auth = FirebaseAuth.instance;
-
   Future<void> signup(String email, String password) async {
     try {
       emit(const LoginState.loading());
       if (StringHelper.isEmail(email) && StringHelper.isPassword(password)) {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        final user = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: email,
           password: password,
         );
-        emit(const LoginState.success());
+        if (user.user != null) {
+          emit(const LoginState.success());
+        } else {
+          emit(LoginState.error(massege: tr('login.error_email')));
+        }
       }
     } catch (e) {
-      emit(const LoginState.error());
+      emit(LoginState.error(massege: tr('login.error_email')));
     }
   }
 
@@ -27,11 +31,16 @@ class LoginCubit extends BaseCubit<LoginState> {
     try {
       emit(const LoginState.loading());
       if (StringHelper.isEmail(email) && password.isNotEmpty) {
-        await auth.signInWithEmailAndPassword(email: email, password: password);
-        emit(const LoginState.success());
+        final userLogin = await auth.signInWithEmailAndPassword(
+            email: email, password: password);
+        if (userLogin.user != null) {
+          emit(const LoginState.success());
+        } else {
+          emit(LoginState.error(massege: tr('login.error_email')));
+        }
       }
     } catch (e) {
-      emit(const LoginState.error());
+      emit(LoginState.error(massege: tr('login.error_email')));
     }
   }
 
@@ -45,7 +54,7 @@ class LoginCubit extends BaseCubit<LoginState> {
         emit(const LoginState.success());
       }
     } catch (e) {
-      emit(const LoginState.error());
+      emit(LoginState.error(massege: tr('login.error_email')));
     }
     return null;
   }
