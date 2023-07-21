@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import '../../commonts/base_cubit.dart';
 import '../../helpers/string_helper.dart';
@@ -38,6 +40,44 @@ class LoginCubit extends BaseCubit<LoginState> {
         } else {
           emit(LoginState.error(massege: tr('login.error_email')));
         }
+      }
+    } catch (e) {
+      emit(LoginState.error(massege: tr('login.error_email')));
+    }
+  }
+
+  Future<void> signInWithApple() async {
+    try {
+      emit(const LoginState.loading());
+      final credential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+        webAuthenticationOptions: WebAuthenticationOptions(
+            clientId: 'de.lunaone.flutter.signinwithappleexample.service',
+            redirectUri: kIsWeb
+                ? Uri.parse('')
+                : Uri.parse(
+                    'https://flutter-sign-in-with-apple-example.glitch.me/callbacks/sign_in_with_apple',
+                  )),
+        nonce: 'example-nonce',
+        state: 'example-state',
+      );
+      final userCredential = await FirebaseAuth.instance.signInWithCredential(
+        OAuthCredential(
+          providerId: 'apple.com',
+          signInMethod: 'oauth',
+          accessToken: credential.identityToken,
+          idToken: credential.identityToken,
+          rawNonce: 'example-nonce', // Should be the same as nonce above
+        ),
+      );
+
+      if (userCredential.user != null) {
+        emit(const LoginState.success());
+      } else {
+        emit(LoginState.error(massege: tr('login.error_email')));
       }
     } catch (e) {
       emit(LoginState.error(massege: tr('login.error_email')));

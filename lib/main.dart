@@ -19,7 +19,7 @@ Future<void> main() async {
       startLocale: const Locale('vi'),
       fallbackLocale: const Locale('vi'),
       path: 'assets/localizations',
-      child: const MyApp()));
+      child: MyApp()));
 }
 
 Future<bool> _initApp() async {

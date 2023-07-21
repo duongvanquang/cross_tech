@@ -1,14 +1,16 @@
+import 'package:auto_route/annotations.dart';
 import 'package:cross_tech/src/extension/build_context_extension.dart';
 import 'package:flutter/material.dart';
 
-class AScreen extends StatefulWidget {
-  const AScreen({super.key});
+@RoutePage()
+class Homepage extends StatefulWidget {
+  const Homepage({super.key});
 
   @override
-  State<AScreen> createState() => _AScreenState();
+  State<Homepage> createState() => _HomepageState();
 }
 
-class _AScreenState extends State<AScreen> {
+class _HomepageState extends State<Homepage> {
   int numberA = 0;
 
   @override

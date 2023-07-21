@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:auto_route/annotations.dart';
+import 'package:cross_tech/src/pages/main_page.dart';
 import 'package:cross_tech/src/pages/signup_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +12,8 @@ import '../constances/assets_path.dart';
 import '../helpers/string_helper.dart'; // Import the StringHelper class
 import '../widgets/chose_login.dart';
 import '../widgets/text_form_field_login.dart';
-import 'home_page.dart';
 
+@RoutePage()
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -44,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
           if (state is LoginStateSuccess) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const AScreen()),
+              MaterialPageRoute(builder: (context) => const MainPage()),
             );
           } else if (state is LoginStateError) {
             ScaffoldMessenger.of(context).showSnackBar(
