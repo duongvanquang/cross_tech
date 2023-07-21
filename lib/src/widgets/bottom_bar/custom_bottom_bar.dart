@@ -1,3 +1,4 @@
+import 'package:cross_tech/src/commonts/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -18,7 +19,7 @@ class _CustomBottomNavigatorBarState extends State<CustomBottomNavigatorBar> {
   Widget build(BuildContext context) {
     return Container(
       height: 100,
-      color: Colors.red,
+      color: AppColors.buttonBackgroundColor,
       child: Stack(
         children: [
           Container(
@@ -28,7 +29,7 @@ class _CustomBottomNavigatorBarState extends State<CustomBottomNavigatorBar> {
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: const [
                   BoxShadow(
-                      color: Colors.yellow,
+                      color: AppColors.mainColor,
                       blurRadius: 10,
                       offset: Offset(0, 4))
                 ]),
@@ -59,12 +60,13 @@ class TabItem extends StatelessWidget {
         children: [
           SvgPicture.asset(
             item!.icon,
-            color: selected ? Colors.redAccent : Colors.grey,
+            color: selected ? Colors.blue : Colors.grey,
+            width: 28,
+            height: 28,
           ),
           Text(item!.text,
               style: TextStyle(
-                  fontSize: 13,
-                  color: selected ? Colors.redAccent : Colors.grey))
+                  fontSize: 13, color: selected ? Colors.blue : Colors.grey))
         ],
       ),
     );

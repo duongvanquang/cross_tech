@@ -5,11 +5,13 @@ import '../../model/bottom_bar/bottom_bar_item.dart';
 
 class BottomBarRepository {
   List<BottomBarItem> get getTabs => [
-        BottomBarItem(MainTab.homePage, ImageAssetPath.imageApple,
-            tr('bottom_bar.potential')),
-        BottomBarItem(MainTab.contactpage, ImageAssetPath.logoSignup,
-            tr('bottom_bar.target')),
-        BottomBarItem(MainTab.profilePage, ImageAssetPath.imageGoogle,
-            tr('bottom_bar.plan'))
+        BottomBarItem(MainTab.homePage, ImageAssetPath.bottomHome,
+            tr('bottom_tabbar.home_page')),
+        BottomBarItem(MainTab.contactpage, ImageAssetPath.bottomContact,
+            tr('bottom_tabbar.contact_page')),
+        BottomBarItem(MainTab.profilePage, ImageAssetPath.bottomProfile,
+            tr('bottom_tabbar.profile_page')),
+        BottomBarItem(MainTab.calendaPage, ImageAssetPath.bottomCalenda,
+            tr('bottom_tabbar.calenda_page'))
       ];
 }

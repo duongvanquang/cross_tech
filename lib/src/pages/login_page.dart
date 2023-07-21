@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:cross_tech/src/pages/main_page.dart';
 import 'package:cross_tech/src/pages/signup_page.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -10,6 +11,7 @@ import '../blocs/login/login_cubit.dart';
 import '../blocs/login/login_state.dart';
 import '../constances/assets_path.dart';
 import '../helpers/string_helper.dart'; // Import the StringHelper class
+import '../routes/app_router.dart';
 import '../widgets/chose_login.dart';
 import '../widgets/text_form_field_login.dart';
 
@@ -44,10 +46,7 @@ class _LoginPageState extends State<LoginPage> {
         bloc: bloc,
         listener: (context, state) {
           if (state is LoginStateSuccess) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const MainPage()),
-            );
+            AutoRouter.of(context).push(const MainPageRoute());
           } else if (state is LoginStateError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(

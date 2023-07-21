@@ -18,6 +18,7 @@ class _MainPageState extends State<MainPage> {
     HomepageRoute(),
     ContactPageRoute(),
     ProfilePageRoute(),
+    PlanPageRoute()
   ];
   @override
   Widget build(BuildContext context) {

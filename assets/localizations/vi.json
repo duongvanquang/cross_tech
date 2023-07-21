@@ -15,5 +15,11 @@
         "error_password":"*Mật khẩu không hợp lệ",
         "button_signup":"Đăng ký",
         "title_snapbar_login":"Tài Khoản hoặc mật khẩu không đúng"
+    },
+    "bottom_tabbar":{
+        "home_page":"Home",
+        "contact_page":"Contact",
+        "profile_page":"Profile",
+        "calenda_page":"Calenda"
     }
 }

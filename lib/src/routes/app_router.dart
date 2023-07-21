@@ -4,6 +4,7 @@ import 'package:cross_tech/src/pages/home_page.dart';
 import '../pages/contact_page.dart';
 import '../pages/login_page.dart';
 import '../pages/main_page.dart';
+import '../pages/plan_page.dart';
 import '../pages/profile_page.dart';
 import 'route_keys.dart';
 
@@ -22,15 +23,15 @@ class AppRouter extends _$AppRouter {
           AutoRoute(
               page: ContactPageRoute.page,
               path: RouteKey.contactPage,
-              children: [
-                AutoRoute(initial: true, page: ContactPageRoute.page)
-              ]),
+              children: [AutoRoute(page: ContactPageRoute.page)]),
           AutoRoute(
               page: ProfilePageRoute.page,
               path: RouteKey.profilePage,
-              children: [
-                AutoRoute(initial: true, page: ProfilePageRoute.page)
-              ]),
+              children: [AutoRoute(page: ProfilePageRoute.page)]),
+          AutoRoute(
+              page: PlanPageRoute.page,
+              path: RouteKey.calendaPage,
+              children: [AutoRoute(page: PlanPageRoute.page)]),
         ])
       ];
 }

@@ -1,4 +1,4 @@
-enum MainTab { homePage, contactpage, profilePage }
+enum MainTab { homePage, contactpage, profilePage, calendaPage }
 
 class BottomBarItem {
   final MainTab tab;
