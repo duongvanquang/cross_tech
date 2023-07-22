@@ -1,8 +1,6 @@
 import 'dart:async';
 
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:cross_tech/src/pages/main_page.dart';
 import 'package:cross_tech/src/pages/signup_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/login/login_cubit.dart';
 import '../blocs/login/login_state.dart';
 import '../constances/assets_path.dart';
-import '../helpers/string_helper.dart'; // Import the StringHelper class
 import '../routes/app_router.dart';
 import '../widgets/chose_login.dart';
 import '../widgets/text_form_field_login.dart';
@@ -27,16 +24,19 @@ class _LoginPageState extends State<LoginPage> {
   StreamController<bool> broadcastStreamController =
       StreamController<bool>.broadcast();
   final LoginCubit bloc = LoginCubit();
+  bool isValid = false;
+
   @override
   void dispose() {
     broadcastStreamController.close();
     super.dispose();
   }
 
-  bool isEmailValid = false;
-  bool isPasswordValid = false;
-  String emailLogin = '';
-  String passwordLogin = '';
+  void updateButtonState() {
+    setState(() {
+      isValid = bloc.email.isNotEmpty && bloc.password.isNotEmpty;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -163,11 +163,8 @@ class _LoginPageState extends State<LoginPage> {
                                   TextFormFeldLogin(
                                     isObscure: false,
                                     onChange: (value) {
-                                      setState(() {
-                                        isEmailValid =
-                                            StringHelper.isEmail(value!);
-                                        emailLogin = value;
-                                      });
+                                      bloc.setEmail(value ?? '');
+                                      updateButtonState();
                                     },
                                     hintext: tr('login.hintex_email'),
                                   ),
@@ -175,11 +172,8 @@ class _LoginPageState extends State<LoginPage> {
                                   TextFormFeldLogin(
                                     isObscure: true,
                                     onChange: (value) {
-                                      setState(() {
-                                        isPasswordValid =
-                                            StringHelper.isPassword(value!);
-                                        passwordLogin = value;
-                                      });
+                                      bloc.setPassword(value ?? '');
+                                      updateButtonState();
                                     },
                                     hintext: tr('login.hintex_password'),
                                   ),
@@ -187,8 +181,9 @@ class _LoginPageState extends State<LoginPage> {
                                   StreamBuilder<bool>(
                                     stream: broadcastStreamController.stream,
                                     builder: (context, snapshot) {
-                                      final isValid =
-                                          isEmailValid && isPasswordValid;
+                                      bool isValid = bloc.email.isNotEmpty &&
+                                          bloc.password.isNotEmpty &&
+                                          bloc.password.length >= 8;
                                       return ChoseLogin(
                                         color: isValid
                                             ? Colors.green
@@ -205,8 +200,7 @@ class _LoginPageState extends State<LoginPage> {
                                             ? () async {
                                                 broadcastStreamController.sink
                                                     .add(true);
-                                                await bloc.signIn(
-                                                    emailLogin, passwordLogin);
+                                                await bloc.signIn();
                                               }
                                             : null,
                                       );

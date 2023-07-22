@@ -44,7 +44,32 @@ dependencies:
   auto_route: ^7.7.1
   flutter_svg: ^2.0.7
   auto_route_generator: ^7.2.0
-  
+  flutter_launcher_icons: "^0.13.1"
+
+flutter_launcher_icons:
+  image_path_android: "assets/images/infographic_571640.png"
+  image_path_ios: "assets/images/infographic_571640.png"
+  android: true 
+  ios: true 
+  adaptive_icon_background: "assets/images/infographic_571640.png" 
+  adaptive_icon_foreground: "assets/images/infographic_571640.png" 
+  min_sdk_android: 21 
+  remove_alpha_ios: true
+  background_color_ios: "#ffffff"
+  web:
+    generate: true
+    image_path: "assets/images/infographic_571640.png"
+    background_color: "#FFFFFF"  # Replace with your desired background color in #RRGGBB format
+    theme_color: "#0000FF"  # Replace with your desired theme color in #RRGGBB format
+  windows:
+    generate: true
+    image_path: "assets/images/infographic_571640.png"
+    icon_size: 48 
+  macos:
+    generate: true
+    image_path: "assets/images/infographic_571640.png"
+
+
 
 dev_dependencies:
   flutter_test:
@@ -60,8 +85,6 @@ dev_dependencies:
   json_serializable: ^6.7.1
   freezed: ^2.3.4
   
- 
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

@@ -17,8 +17,8 @@ class _MainPageState extends State<MainPage> {
   static const List<PageRouteInfo> _homeRoutes = [
     HomepageRoute(),
     ContactPageRoute(),
+    PlanPageRoute(),
     ProfilePageRoute(),
-    PlanPageRoute()
   ];
   @override
   Widget build(BuildContext context) {

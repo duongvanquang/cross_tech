@@ -10,13 +10,35 @@ import 'login_state.dart';
 class LoginCubit extends BaseCubit<LoginState> {
   LoginCubit() : super(const LoginState.initial());
   FirebaseAuth auth = FirebaseAuth.instance;
-  Future<void> signup(String email, String password) async {
+  String _email = '';
+  String _password = '';
+  String _confirmPassword = '';
+
+  String get email => _email;
+  String get password => _password;
+  String get confirmPassword => _confirmPassword;
+
+  void setEmail(String email) {
+    _email = email;
+  }
+
+  void setPassword(String password) {
+    _password = password;
+  }
+
+  void setConfirmPassword(String confirmPassword) {
+    _confirmPassword = confirmPassword;
+  }
+
+  Future<void> signup() async {
     try {
       emit(const LoginState.loading());
-      if (StringHelper.isEmail(email) && StringHelper.isPassword(password)) {
+      if (StringHelper.isEmail(_email) &&
+          StringHelper.isPassword(_password) &&
+          _password == _confirmPassword) {
         final user = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: email,
-          password: password,
+          email: _email,
+          password: _password,
         );
         if (user.user != null) {
           emit(const LoginState.success());
@@ -29,12 +51,14 @@ class LoginCubit extends BaseCubit<LoginState> {
     }
   }
 
-  Future<void> signIn(String email, String password) async {
+  Future<void> signIn() async {
     try {
       emit(const LoginState.loading());
-      if (StringHelper.isEmail(email) && password.isNotEmpty) {
+      if (StringHelper.isEmail(_email) && _password.isNotEmpty) {
         final userLogin = await auth.signInWithEmailAndPassword(
-            email: email, password: password);
+          email: _email,
+          password: _password,
+        );
         if (userLogin.user != null) {
           emit(const LoginState.success());
         } else {
@@ -84,12 +108,12 @@ class LoginCubit extends BaseCubit<LoginState> {
     }
   }
 
-  Future<String?> resetPassword(String email) async {
+  Future<String?> resetPassword() async {
     try {
       emit(const LoginState.loading());
-      if (StringHelper.isEmail(email)) {
+      if (StringHelper.isEmail(_email)) {
         await auth.sendPasswordResetEmail(
-          email: email.trim(),
+          email: _email.trim(),
         );
         emit(const LoginState.success());
       }

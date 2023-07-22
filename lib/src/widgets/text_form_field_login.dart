@@ -9,12 +9,19 @@ class TextFormFeldLogin extends StatefulWidget {
     this.hintext,
     this.onChange,
     this.isObscure = false,
+    this.isConfirmPassword = false,
+    this.passwordController,
+    this.confirmErrorText,
+    this.confirmErrorVisible = true,
   }) : super(key: key);
 
   final String? hintext;
   final Function(String?)? onChange;
   final bool? isObscure;
-
+  final bool isConfirmPassword;
+  final String? confirmErrorText;
+  final TextEditingController? passwordController;
+  final bool confirmErrorVisible;
   @override
   State<TextFormFeldLogin> createState() => _TextFormFeldLoginState();
 }
@@ -55,10 +62,17 @@ class _TextFormFeldLoginState extends State<TextFormFeldLogin> {
               !StringHelper.isEmail(value!)) {
             return tr('login.error_email');
           }
-          if (widget.hintext == tr('login.hintex_password') &&
+          if (widget.hintext == tr('login.hintext_signup_password') &&
               !StringHelper.isPassword(value!)) {
             return tr('login.error_password');
           }
+          if (widget.isConfirmPassword && widget.confirmErrorVisible) {
+            if (value != widget.passwordController?.text) {
+              return widget.confirmErrorText ??
+                  tr('login.error_confirm_password');
+            }
+          }
+
           return null;
         },
       ),
