@@ -11,7 +11,7 @@ class _CheckpageState extends State<Checkpage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.yellowAccent,
+      color: Colors.blueAccent,
     );
   }
 }
